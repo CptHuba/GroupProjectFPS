@@ -118,6 +118,11 @@ public class PlayerCharacterController : MonoBehaviour
     const float k_JumpGroundingPreventionTime = 0.2f;
     const float k_GroundCheckDistanceInAir = 0.07f;
 
+    [Header("Dancing Heart Pickup")]
+    public bool heartIsOn = false;
+    public float heartTimer;
+    public AudioClip heartMusic;
+
     void Start()
     {
         // fetch components on the same gameObject
@@ -157,6 +162,15 @@ public class PlayerCharacterController : MonoBehaviour
 
         bool wasGrounded = isGrounded;
         GroundCheck();
+
+        if(heartIsOn && heartTimer >0f)
+        {
+            heartTimer -= Time.deltaTime;
+        } else if (heartIsOn && heartTimer <=0f)
+        {
+            heartIsOn = false;
+            audioSource.Stop();
+        }
 
         // landing
         if (isGrounded && !wasGrounded)
