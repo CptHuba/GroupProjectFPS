@@ -28,11 +28,15 @@ public class DoorController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-            trigger = true;  
+        Damageable check = other.GetComponent<Damageable>();
+        if (check == null) return;
+        trigger = true;  
     }
 
     void OnTriggerExit(Collider other)
     {
-            trigger = false;
+        Damageable check = other.GetComponent<Damageable>();
+        if (check == null) return;
+        trigger = false;
     }
 }
