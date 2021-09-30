@@ -38,24 +38,14 @@ public class FeedbackFlashHUD : MonoBehaviour
     Health m_PlayerHealth;
     GameFlowManager m_GameFlowManager;
 
-    PlayerCharacterController player;
-    [Header("Dancing Heart Pickup")]
-    public CanvasGroup heartCanvasGroup;
-    public CanvasGroup PinkOverlayCanvasGroup;
-    public float heartMaxAlpha = .8f;
-    public float pulsatingHeartFrequency = 4f;
-
     void Start()
     {
         // Subscribe to player damage events
-        //PlayerCharacterController playerCharacterController = FindObjectOfType<PlayerCharacterController>();
-        player = FindObjectOfType<PlayerCharacterController>();
-        DebugUtility.HandleErrorIfNullFindObject<PlayerCharacterController, FeedbackFlashHUD>(player, this);
+        PlayerCharacterController playerCharacterController = FindObjectOfType<PlayerCharacterController>();
+        DebugUtility.HandleErrorIfNullFindObject<PlayerCharacterController, FeedbackFlashHUD>(playerCharacterController, this);
 
-        //m_PlayerHealth = playerCharacterController.GetComponent<Health>();
-        //DebugUtility.HandleErrorIfNullGetComponent<Health, FeedbackFlashHUD>(m_PlayerHealth, this, playerCharacterController.gameObject);
-        m_PlayerHealth = player.GetComponent<Health>();
-        DebugUtility.HandleErrorIfNullGetComponent<Health, FeedbackFlashHUD>(m_PlayerHealth, this, player.gameObject);
+        m_PlayerHealth = playerCharacterController.GetComponent<Health>();
+        DebugUtility.HandleErrorIfNullGetComponent<Health, FeedbackFlashHUD>(m_PlayerHealth, this, playerCharacterController.gameObject);
 
         m_GameFlowManager = FindObjectOfType<GameFlowManager>();
         DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, FeedbackFlashHUD>(m_GameFlowManager, this);
@@ -96,20 +86,6 @@ public class FeedbackFlashHUD : MonoBehaviour
                 flashCanvasGroup.gameObject.SetActive(false);
                 m_FlashActive = false;
             }
-        }
-
-        //Heart Pickup
-        if (player.heartIsOn)
-        {
-            heartCanvasGroup.gameObject.SetActive(true);
-            PinkOverlayCanvasGroup.gameObject.SetActive(true);
-            PinkOverlayCanvasGroup.alpha = 0.3f;
-            heartCanvasGroup.alpha = ((Mathf.Sin(Time.time * pulsatingVignetteFrequency) / 2) + 0.5f) * heartMaxAlpha;
-        }
-        else
-        {
-            heartCanvasGroup.gameObject.SetActive(false);
-            PinkOverlayCanvasGroup.gameObject.SetActive(false);
         }
     }
 
