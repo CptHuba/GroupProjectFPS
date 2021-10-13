@@ -5,7 +5,6 @@ using UnityEngine;
 public class HeartPickup : MonoBehaviour
 {
     Pickup m_Pickup;
-    //public float timerlength = 11f;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +20,6 @@ public class HeartPickup : MonoBehaviour
         if (player && !player.heartIsOn)
         {
             player.heartIsOn = true;
-            player.heartTimer = 11f;
             player.audioSource.PlayOneShot(player.heartMusic);
             m_Pickup.PlayPickupFeedback();
             Destroy(gameObject);

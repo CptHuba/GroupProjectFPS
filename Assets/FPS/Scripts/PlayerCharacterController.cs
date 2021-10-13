@@ -120,8 +120,9 @@ public class PlayerCharacterController : MonoBehaviour
 
     [Header("Dancing Heart Pickup")]
     public bool heartIsOn = false;
-    public float heartTimer;
+    public float heartTimer = 5f;
     public AudioClip heartMusic;
+    public bool shouldEnemyBeDancing = false;
 
     void Start()
     {
@@ -166,8 +167,10 @@ public class PlayerCharacterController : MonoBehaviour
         if(heartIsOn && heartTimer >0f)
         {
             heartTimer -= Time.deltaTime;
+            shouldEnemyBeDancing = true;
         } else if (heartIsOn && heartTimer <=0f)
         {
+            shouldEnemyBeDancing = false;
             heartIsOn = false;
             audioSource.Stop();
         }
