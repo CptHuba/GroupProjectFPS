@@ -121,6 +121,7 @@ public class PlayerCharacterController : MonoBehaviour
     [Header("Dancing Heart Pickup")]
     public bool heartIsOn = false;
     public float heartTimer = 5f;
+    float activeHeartTimer;
     public AudioClip heartMusic;
     public bool shouldEnemyBeDancing = false;
 
@@ -146,6 +147,8 @@ public class PlayerCharacterController : MonoBehaviour
 
         m_Health.onDie += OnDie;
 
+        activeHeartTimer = heartTimer;
+
         // force the crouch state to false when starting
         SetCrouchingState(false, true);
         UpdateCharacterHeight(true);
@@ -163,13 +166,13 @@ public class PlayerCharacterController : MonoBehaviour
 
         bool wasGrounded = isGrounded;
         GroundCheck();
-
-        if(heartIsOn && heartTimer >0f)
+        if(heartIsOn && activeHeartTimer >0f)
         {
-            heartTimer -= Time.deltaTime;
+            activeHeartTimer -= Time.deltaTime;
             shouldEnemyBeDancing = true;
-        } else if (heartIsOn && heartTimer <=0f)
+        } else if (heartIsOn && activeHeartTimer <=0f)
         {
+            activeHeartTimer = heartTimer;
             shouldEnemyBeDancing = false;
             heartIsOn = false;
             audioSource.Stop();
