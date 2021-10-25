@@ -94,13 +94,18 @@ PrefabInstance:
     - target: {fileID: 3637301713060460815, guid: d771f03a2656e194fba5a444d5a3d9e7,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4431849209869673682, guid: d771f03a2656e194fba5a444d5a3d9e7,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8200220640316782920, guid: d771f03a2656e194fba5a444d5a3d9e7,
+        type: 3}
+      propertyPath: pickupSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: f1fe060d8b18d2f4f95cf913dfb7ac6c, type: 3}
     - target: {fileID: 8200220640316782920, guid: d771f03a2656e194fba5a444d5a3d9e7,
         type: 3}
       propertyPath: rotatingSpeed

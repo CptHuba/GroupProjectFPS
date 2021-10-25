@@ -50,13 +50,16 @@ public class Pickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         PlayerCharacterController pickingPlayer = other.GetComponent<PlayerCharacterController>();
 
         if (pickingPlayer != null)
         {
             if (onPick != null)
             {
-                onPick.Invoke(pickingPlayer);
+                onPick.Invoke(pickingPlayer); 
+                AudioSource.PlayClipAtPoint(pickupSFX, transform.position);
+
             }
         }
     }
@@ -66,10 +69,7 @@ public class Pickup : MonoBehaviour
         if (m_HasPlayedFeedback)
             return;
 
-        if (pickupSFX)
-        {
-            AudioUtility.CreateSFX(pickupSFX, transform.position, AudioUtility.AudioGroups.Pickup, 0f);
-        }
+        
 
         if (pickupVFXPrefab)
         {
