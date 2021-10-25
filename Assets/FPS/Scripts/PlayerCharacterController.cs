@@ -148,7 +148,7 @@ public class PlayerCharacterController : MonoBehaviour
     void Update()
     {
         // check for Y kill
-        if(!isDead && transform.position.y < killHeight)
+        if(!isDead && (transform.position.y < killHeight || transform.position.y > -killHeight))
         {
             m_Health.Kill();
         }
@@ -205,13 +205,13 @@ public class PlayerCharacterController : MonoBehaviour
 
         // reset values before the ground check
         isGrounded = false;
-        m_GroundNormal = Vector3.up;
+        m_GroundNormal = transform.up;
 
         // only try to detect ground if it's been a short amount of time since last jump; otherwise we may snap to the ground instantly after we try jumping
         if (Time.time >= m_LastTimeJumped + k_JumpGroundingPreventionTime)
         {
             // if we're grounded, collect info about the ground normal with a downward capsule cast representing our character capsule
-            if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(m_Controller.height), m_Controller.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, groundCheckLayers, QueryTriggerInteraction.Ignore))
+            if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(m_Controller.height), m_Controller.radius, -transform.up, out RaycastHit hit, chosenGroundCheckDistance, groundCheckLayers, QueryTriggerInteraction.Ignore))
             {
                 // storing the upward direction for the surface found
                 m_GroundNormal = hit.normal;
@@ -226,7 +226,7 @@ public class PlayerCharacterController : MonoBehaviour
                     // handle snapping to the ground
                     if (hit.distance > m_Controller.skinWidth)
                     {
-                        m_Controller.Move(Vector3.down * hit.distance);
+                        m_Controller.Move(-transform.up * hit.distance);
                     }
                 }
             }
@@ -289,7 +289,7 @@ public class PlayerCharacterController : MonoBehaviour
                         characterVelocity = new Vector3(characterVelocity.x, 0f, characterVelocity.z);
 
                         // then, add the jumpSpeed value upwards
-                        characterVelocity += Vector3.up * jumpForce;
+                        characterVelocity += transform.up * jumpForce;
 
                         // play sound
                         audioSource.PlayOneShot(jumpSFX);
@@ -300,7 +300,7 @@ public class PlayerCharacterController : MonoBehaviour
 
                         // Force grounding to false
                         isGrounded = false;
-                        m_GroundNormal = Vector3.up;
+                        m_GroundNormal = transform.up;
                     }
                 }
 
@@ -323,12 +323,12 @@ public class PlayerCharacterController : MonoBehaviour
 
                 // limit air speed to a maximum, but only horizontally
                 float verticalVelocity = characterVelocity.y;
-                Vector3 horizontalVelocity = Vector3.ProjectOnPlane(characterVelocity, Vector3.up);
+                Vector3 horizontalVelocity = Vector3.ProjectOnPlane(characterVelocity, transform.up);
                 horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeedInAir * speedModifier);
                 characterVelocity = horizontalVelocity + (Vector3.up * verticalVelocity);
 
                 // apply the gravity to the velocity
-                characterVelocity += Vector3.down * gravityDownForce * Time.deltaTime;
+                characterVelocity += -transform.up * gravityDownForce * Time.deltaTime;
             }
         }
 
@@ -379,8 +379,8 @@ public class PlayerCharacterController : MonoBehaviour
         if (force)
         {
             m_Controller.height = m_TargetCharacterHeight;
-            m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
-            playerCamera.transform.localPosition = Vector3.up * m_TargetCharacterHeight * cameraHeightRatio;
+            m_Controller.center = transform.up * m_Controller.height * 0.5f;
+            playerCamera.transform.localPosition = transform.up * m_TargetCharacterHeight * cameraHeightRatio;
             m_Actor.aimPoint.transform.localPosition = m_Controller.center;
         }
         // Update smooth height
@@ -388,8 +388,8 @@ public class PlayerCharacterController : MonoBehaviour
         {
             // resize the capsule and adjust camera position
             m_Controller.height = Mathf.Lerp(m_Controller.height, m_TargetCharacterHeight, crouchingSharpness * Time.deltaTime);
-            m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
-            playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, Vector3.up * m_TargetCharacterHeight * cameraHeightRatio, crouchingSharpness * Time.deltaTime);
+            m_Controller.center = transform.up * m_Controller.height * 0.5f;
+            playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, transform.up * m_TargetCharacterHeight * cameraHeightRatio, crouchingSharpness * Time.deltaTime);
             m_Actor.aimPoint.transform.localPosition = m_Controller.center;
         }
     }
