@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 
 public enum WeaponShootType
@@ -61,17 +61,17 @@ public class WeaponController : MonoBehaviour
 
     [Header("Ammo Parameters")]
     [Tooltip("Amount of ammo reloaded per second")]
-    public float ammoReloadRate = 1f;
+    public float ammoReloadRate = 16f;
     [Tooltip("Delay after the last shot before starting to reload")]
-    public float ammoReloadDelay = 2f;
+    public float ammoReloadDelay = 0f;
     [Tooltip("Maximum amount of ammo in the gun")]
-    public float maxAmmo = 8;
+    public float maxAmmo = 16f;
 
     [Header("Charging parameters (charging weapons only)")]
     [Tooltip("Trigger a shot when maximum charge is reached")]
     public bool automaticReleaseOnCharged;
     [Tooltip("Duration to reach maximum charge")]
-    public float maxChargeDuration = 2f;
+    public float maxChargeDuration = 0f;
     [Tooltip("Initial ammo used when starting to charge")]
     public float ammoUsedOnStartCharge = 1f;
     [Tooltip("Additional ammo used when charge reaches its maximum")]
@@ -168,7 +168,7 @@ public class WeaponController : MonoBehaviour
 
         if (maxAmmo == Mathf.Infinity)
         {
-            currentAmmoRatio = 1f;
+            currentAmmoRatio = 2f;
         }
         else
         {
