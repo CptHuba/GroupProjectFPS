@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: c944460b7f1a8ef47b05ebec140bdd17
+=======
+guid: 4297133a00cbce6408c4fbc47817aa99
+>>>>>>> 05583142e614815af14981b927c75edb2d6e9b93
 timeCreated: 1486799929
 licenseType: Store
 NativeFormatImporter:
