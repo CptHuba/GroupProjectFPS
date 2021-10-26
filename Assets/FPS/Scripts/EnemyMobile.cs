@@ -9,6 +9,8 @@ public class EnemyMobile : MonoBehaviour
         Patrol,
         Follow,
         Attack,
+        //Dance is part of the Heart Pick-up functionality 
+        Dance,
     }
 
     public Animator animator;
@@ -26,6 +28,7 @@ public class EnemyMobile : MonoBehaviour
 
     public AIState aiState { get; private set; }
     EnemyController m_EnemyController;
+    PlayerCharacterController m_PlayerCharacterController;
     AudioSource m_AudioSource;
 
     const string k_AnimMoveSpeedParameter = "MoveSpeed";
@@ -37,6 +40,8 @@ public class EnemyMobile : MonoBehaviour
     {
         m_EnemyController = GetComponent<EnemyController>();
         DebugUtility.HandleErrorIfNullGetComponent<EnemyController, EnemyMobile>(m_EnemyController, this, gameObject);
+
+        m_PlayerCharacterController = GameObject.Find("Player").GetComponent<PlayerCharacterController>();
 
         m_EnemyController.onAttack += OnAttack;
         m_EnemyController.onDetectedTarget += OnDetectedTarget;
@@ -75,7 +80,11 @@ public class EnemyMobile : MonoBehaviour
         {
             case AIState.Follow:
                 // Transition to attack when there is a line of sight to the target
-                if (m_EnemyController.isSeeingTarget && m_EnemyController.isTargetInAttackRange)
+                if (m_PlayerCharacterController.shouldEnemyBeDancing)
+                {
+                    aiState = AIState.Dance;
+                }
+                else if (m_EnemyController.isSeeingTarget && m_EnemyController.isTargetInAttackRange)
                 {
                     aiState = AIState.Attack;
                     m_EnemyController.SetNavDestination(transform.position);
@@ -83,7 +92,18 @@ public class EnemyMobile : MonoBehaviour
                 break;
             case AIState.Attack:
                 // Transition to follow when no longer a target in attack range
-                if (!m_EnemyController.isTargetInAttackRange)
+                if (m_PlayerCharacterController.shouldEnemyBeDancing)
+                {
+                    aiState = AIState.Dance;
+                }
+                else if (!m_EnemyController.isTargetInAttackRange)
+                {
+                    aiState = AIState.Follow;
+                }
+                break;
+            case AIState.Dance:
+                // Transition to follow when no longer Dancing
+                if (!m_PlayerCharacterController.shouldEnemyBeDancing)
                 {
                     aiState = AIState.Follow;
                 }
@@ -117,6 +137,10 @@ public class EnemyMobile : MonoBehaviour
                 }
                 m_EnemyController.OrientTowards(m_EnemyController.knownDetectedTarget.transform.position);
                 m_EnemyController.TryAtack(m_EnemyController.knownDetectedTarget.transform.position);
+                break;
+            case AIState.Dance:
+                m_EnemyController.SetNavDestination(m_EnemyController.transform.position);
+                m_EnemyController.transform.Rotate(Vector3.up, 360f * Time.deltaTime, Space.Self);
                 break;
         }
     }
