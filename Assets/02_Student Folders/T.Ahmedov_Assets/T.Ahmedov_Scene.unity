@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.11629354, g: 0.4418402, b: 0.41375017, a: 1}
+  m_IndirectSpecularColor: {r: 0.012442955, g: 0.21165863, b: 0.24103999, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 434275325dbd9a2449a51745e763013d,
+  m_LightingDataAsset: {fileID: 112000000, guid: ac9a25692440d5841903d39cf924ba9a,
     type: 2}
   m_LightingSettings: {fileID: 174283984}
 --- !u!196 &4
@@ -439,10 +439,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dbfba93b9e4cf45ab648e6797b7a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 1
+  multiplier: 10
   pickupEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
     type: 3}
-  coinSound: {fileID: 8300000, guid: 9a68a4ac93e12114d81b1a79b02c3ae1, type: 3}
+  coinSound: {fileID: 8300000, guid: 530ab55b26a0f324796ea25389976562, type: 3}
 --- !u!136 &48582004
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1839,6 +1839,11 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 600
       objectReference: {fileID: 0}
+    - target: {fileID: 7886326314632062835, guid: e29d43f43cc5d82499dd9926e01847d3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.018
+      objectReference: {fileID: 0}
     - target: {fileID: 8668183599622985987, guid: e29d43f43cc5d82499dd9926e01847d3,
         type: 3}
       propertyPath: m_Height
@@ -1848,6 +1853,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087143436424816424, guid: e29d43f43cc5d82499dd9926e01847d3,
+        type: 3}
+      propertyPath: attackEyeColor.b
+      value: 23.23446
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087143436424816424, guid: e29d43f43cc5d82499dd9926e01847d3,
+        type: 3}
+      propertyPath: attackEyeColor.g
+      value: 23.968628
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087143436424816424, guid: e29d43f43cc5d82499dd9926e01847d3,
+        type: 3}
+      propertyPath: attackEyeColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087143436424816424, guid: e29d43f43cc5d82499dd9926e01847d3,
+        type: 3}
+      propertyPath: defaultEyeColor.b
+      value: 12.879724
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087143436424816424, guid: e29d43f43cc5d82499dd9926e01847d3,
+        type: 3}
+      propertyPath: defaultEyeColor.g
+      value: 23.968628
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087143436424816424, guid: e29d43f43cc5d82499dd9926e01847d3,
+        type: 3}
+      propertyPath: defaultEyeColor.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e29d43f43cc5d82499dd9926e01847d3, type: 3}
@@ -7827,6 +7862,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7406548990343174644, guid: a52f38d74c13ed445abedcf682005626,
+        type: 3}
+      propertyPath: m_Speed
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a52f38d74c13ed445abedcf682005626, type: 3}
 --- !u!1001 &1037872613
@@ -11309,6 +11349,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7406548990343174644, guid: a52f38d74c13ed445abedcf682005626,
+        type: 3}
+      propertyPath: m_Speed
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a52f38d74c13ed445abedcf682005626, type: 3}
 --- !u!1 &1418774881
@@ -11890,6 +11935,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 320366457750808951, guid: a52f38d74c13ed445abedcf682005626,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 320366457750808951, guid: a52f38d74c13ed445abedcf682005626,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22
+      objectReference: {fileID: 0}
     - target: {fileID: 2015434656898269652, guid: a52f38d74c13ed445abedcf682005626,
         type: 3}
       propertyPath: m_Name
@@ -11903,12 +11958,12 @@ PrefabInstance:
     - target: {fileID: 2015434656898269656, guid: a52f38d74c13ed445abedcf682005626,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 75.46
+      value: 75.89
       objectReference: {fileID: 0}
     - target: {fileID: 2015434656898269656, guid: a52f38d74c13ed445abedcf682005626,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.37
+      value: -7.44
       objectReference: {fileID: 0}
     - target: {fileID: 2015434656898269656, guid: a52f38d74c13ed445abedcf682005626,
         type: 3}
@@ -11948,6 +12003,11 @@ PrefabInstance:
     - target: {fileID: 2015434656898269656, guid: a52f38d74c13ed445abedcf682005626,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7406548990343174644, guid: a52f38d74c13ed445abedcf682005626,
+        type: 3}
+      propertyPath: m_Speed
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -12447,10 +12507,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dbfba93b9e4cf45ab648e6797b7a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 1
+  multiplier: 10
   pickupEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
     type: 3}
-  coinSound: {fileID: 0}
+  coinSound: {fileID: 8300000, guid: 530ab55b26a0f324796ea25389976562, type: 3}
 --- !u!136 &1584105551
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -13809,6 +13869,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stairs_Large (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2512510854935933764, guid: 757acbc2a10061e448acfff833eae77b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512510854935933764, guid: 757acbc2a10061e448acfff833eae77b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.61
+      objectReference: {fileID: 0}
     - target: {fileID: 3290197451720618213, guid: 757acbc2a10061e448acfff833eae77b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -13904,6 +13974,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4882006969614509316, guid: 757acbc2a10061e448acfff833eae77b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882006969614509316, guid: 757acbc2a10061e448acfff833eae77b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -22.05
+      objectReference: {fileID: 0}
     - target: {fileID: 5592233710664463574, guid: 757acbc2a10061e448acfff833eae77b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -13918,6 +13998,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089628720551119533, guid: 757acbc2a10061e448acfff833eae77b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089628720551119533, guid: 757acbc2a10061e448acfff833eae77b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -23.9
       objectReference: {fileID: 0}
     - target: {fileID: 6764359378915241544, guid: 757acbc2a10061e448acfff833eae77b,
         type: 3}
@@ -14038,6 +14128,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 9147921784819522645, guid: 757acbc2a10061e448acfff833eae77b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 9147921784819522645, guid: 757acbc2a10061e448acfff833eae77b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757acbc2a10061e448acfff833eae77b, type: 3}
@@ -15023,10 +15123,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dbfba93b9e4cf45ab648e6797b7a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 1
+  multiplier: 10
   pickupEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
     type: 3}
-  coinSound: {fileID: 0}
+  coinSound: {fileID: 8300000, guid: 530ab55b26a0f324796ea25389976562, type: 3}
 --- !u!136 &1829383687
 CapsuleCollider:
   m_ObjectHideFlags: 0
