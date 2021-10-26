@@ -17,7 +17,7 @@ public class Jetpack : MonoBehaviour
     public float jetpackAcceleration = 7f;
     [Range(0f, 1f)]
     [Tooltip("This will affect how much using the jetpack will cancel the gravity value, to start going up faster. 0 is not at all, 1 is instant")]
-    public float jetpackDownwardVelocityCancelingFactor = 1f;
+    public float jetpackDownwardVelocityCancelingFactor = 0.5f;
 
     [Header("Durations")]
     [Tooltip("Time it takes to consume all the jetpack fuel")]
