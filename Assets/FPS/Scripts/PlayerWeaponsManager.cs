@@ -66,6 +66,10 @@ public class PlayerWeaponsManager : MonoBehaviour
     public UnityAction<WeaponController, int> onAddedWeapon;
     public UnityAction<WeaponController, int> onRemovedWeapon;
 
+    public bool pepperActive = false;
+    public bool activated = false;
+    public int oldBulletsPerShot;
+
     WeaponController[] m_WeaponSlots = new WeaponController[9]; // 9 available weapon slots
     PlayerInputHandler m_InputHandler;
     PlayerCharacterController m_PlayerCharacterController;
@@ -106,6 +110,23 @@ public class PlayerWeaponsManager : MonoBehaviour
     {
         // shoot handling
         WeaponController activeWeapon = GetActiveWeapon();
+
+        if(!pepperActive & !activated)
+        {
+            oldBulletsPerShot = activeWeapon.bulletsPerShot;
+        }
+
+        if(pepperActive)
+        {
+            activeWeapon.bulletsPerShot = 10 ;
+            activated = true;
+        }
+
+        if(!pepperActive && activated)
+        {
+            activeWeapon.bulletsPerShot = oldBulletsPerShot ;
+            activated = false;
+        }
 
         if (activeWeapon && m_WeaponSwitchState == WeaponSwitchState.Up)
         {

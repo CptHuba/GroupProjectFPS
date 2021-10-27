@@ -33,19 +33,26 @@ public class FeedbackFlashHUD : MonoBehaviour
     [Tooltip("Max alpha of the heal flash")]
     public float healFlashMaxAlpha = 1f;
 
+    [Header("Pepper Power")]
+    public CanvasGroup pepperCanvasGroup;
+    public float pepperMaxAlpha = .8f;
+    public float pulsatingPepperFrequency = 4f;
+
     bool m_FlashActive;
     float m_LastTimeFlashStarted = Mathf.NegativeInfinity;
     Health m_PlayerHealth;
     GameFlowManager m_GameFlowManager;
 
+    PlayerCharacterController m_player;
+
     void Start()
     {
         // Subscribe to player damage events
-        PlayerCharacterController playerCharacterController = FindObjectOfType<PlayerCharacterController>();
-        DebugUtility.HandleErrorIfNullFindObject<PlayerCharacterController, FeedbackFlashHUD>(playerCharacterController, this);
+        m_player = FindObjectOfType<PlayerCharacterController>();
+        DebugUtility.HandleErrorIfNullFindObject<PlayerCharacterController, FeedbackFlashHUD>(m_player, this);
 
-        m_PlayerHealth = playerCharacterController.GetComponent<Health>();
-        DebugUtility.HandleErrorIfNullGetComponent<Health, FeedbackFlashHUD>(m_PlayerHealth, this, playerCharacterController.gameObject);
+        m_PlayerHealth = m_player.GetComponent<Health>();
+        DebugUtility.HandleErrorIfNullGetComponent<Health, FeedbackFlashHUD>(m_PlayerHealth, this, m_player.gameObject);
 
         m_GameFlowManager = FindObjectOfType<GameFlowManager>();
         DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, FeedbackFlashHUD>(m_GameFlowManager, this);
@@ -86,6 +93,17 @@ public class FeedbackFlashHUD : MonoBehaviour
                 flashCanvasGroup.gameObject.SetActive(false);
                 m_FlashActive = false;
             }
+        }
+
+        // PEPPER
+        if(m_player.pepperIsOn)
+        {
+            pepperCanvasGroup.gameObject.SetActive(true);
+            pepperCanvasGroup.alpha = ((Mathf.Sin(Time.time * pulsatingPepperFrequency) / 2) + 0.5f) * pepperMaxAlpha;
+        }
+        else
+        {
+            pepperCanvasGroup.gameObject.SetActive(false);
         }
     }
 

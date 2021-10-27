@@ -125,6 +125,11 @@ public class PlayerCharacterController : MonoBehaviour
     public AudioClip heartMusic;
     public bool shouldEnemyBeDancing = false;
 
+    [Header("Pepper Power Pickup")]
+    public bool pepperIsOn = false;
+    public float pepperTimer;
+    public AudioClip pepperMusic;
+
     void Start()
     {
         // fetch components on the same gameObject
@@ -166,6 +171,19 @@ public class PlayerCharacterController : MonoBehaviour
 
         bool wasGrounded = isGrounded;
         GroundCheck();
+
+        if(pepperIsOn && pepperTimer > 0f)
+        {
+            pepperTimer -= Time.deltaTime;
+            m_WeaponsManager.pepperActive = true;
+        } 
+        else if(pepperIsOn && pepperTimer <= 0f)
+        {
+            m_WeaponsManager.pepperActive = false;
+            pepperIsOn = false;
+            audioSource.Stop();
+        }
+
         if(heartIsOn && activeHeartTimer >0f)
         {
             activeHeartTimer -= Time.deltaTime;
@@ -190,12 +208,12 @@ public class PlayerCharacterController : MonoBehaviour
                 m_Health.TakeDamage(dmgFromFall, null);
 
                 // fall damage SFX
-                audioSource.PlayOneShot(fallDamageSFX);
+                if(!pepperIsOn)audioSource.PlayOneShot(fallDamageSFX);
             }
             else
             {
                 // land SFX
-                audioSource.PlayOneShot(landSFX);
+                if(!pepperIsOn)audioSource.PlayOneShot(landSFX);
             }
         }
 
